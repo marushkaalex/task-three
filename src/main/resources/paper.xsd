@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://am.epam.com/paper"
+        xmlns:tns="http://am.epam.com/paper"
+        elementFormDefault="qualified"
+>
+    <element name="papers">
+        <complexType>
+            <sequence>
+                <element name="paper" type="tns:paper"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="paper">
+        <all>
+            <element name="title" type="string"/>
+            <element name="type" type="tns:type"/>
+            <element name="chars" type="tns:chars"/>
+        </all>
+        <attribute name="monthly" type="boolean" default="false"/>
+    </complexType>
+    <simpleType name="type">
+        <restriction base="string">
+            <enumeration value="newspaper"/>
+            <enumeration value="magazine"/>
+            <enumeration value="booklet"/>
+        </restriction>
+    </simpleType>
+    <complexType name="chars">
+        <all>
+            <element name="colored" type="boolean"/>
+            <element name="pageCount" type="unsignedInt"/>
+            <element name="index" type="string" minOccurs="0" maxOccurs="1"/>
+        </all>
+    </complexType>
+</schema>
