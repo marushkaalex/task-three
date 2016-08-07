@@ -7,8 +7,6 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +21,10 @@ public class StaxParser implements PaperParser {
             XMLInputFactory factory = XMLInputFactory.newInstance();
             XMLEventReader eventReader =
                     factory.createXMLEventReader(
-                            new FileReader(fileName));
+                            StaxParser.class.getClassLoader().getResourceAsStream("paper.xml")
+                    );
 
-            while(eventReader.hasNext()) {
+            while (eventReader.hasNext()) {
                 XMLEvent event = eventReader.nextEvent();
                 switch (event.getEventType()) {
                     case XMLStreamConstants.START_ELEMENT:
@@ -39,7 +38,7 @@ public class StaxParser implements PaperParser {
                         break;
                 }
             }
-        } catch (FileNotFoundException | XMLStreamException e) {
+        } catch (XMLStreamException e) {
             throw new ParsingException(e);
         }
 
@@ -65,7 +64,7 @@ public class StaxParser implements PaperParser {
     }
 
     private void handleEndElement(XMLEvent event) {
-        String qName = event.asStartElement().getName().getLocalPart();
+        String qName = event.asEndElement().getName().getLocalPart();
         switch (qName) {
             case "paper":
                 paperList.add(tmpPaper);

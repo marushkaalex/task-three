@@ -1,6 +1,5 @@
 package com.epam.am.xml.parser;
 
-import com.epam.am.xml.Runner;
 import com.epam.am.xml.model.Paper;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -21,7 +20,7 @@ public class SaxParser implements PaperParser {
             SAXParser parser = factory.newSAXParser();
 
             SaxHandler handler = new SaxHandler();
-            parser.parse(Runner.class.getClassLoader().getResourceAsStream("paper.xml"), handler);
+            parser.parse(SaxParser.class.getClassLoader().getResourceAsStream("paper.xml"), handler);
 
             return handler.paperList;
         } catch (ParserConfigurationException | SAXException | IOException e) {

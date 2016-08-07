@@ -1,18 +1,23 @@
 package com.epam.am.xml;
 
 import com.epam.am.xml.model.Paper;
-import com.epam.am.xml.parser.PaperParser;
-import com.epam.am.xml.parser.ParsingException;
-import com.epam.am.xml.parser.SaxParser;
+import com.epam.am.xml.parser.*;
 
 import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-        PaperParser parser = new SaxParser();
         try {
-            List<Paper> paperList = parser.parse("paper.xml");
-            System.out.println(paperList);
+            PaperParser parser = new DomParser();
+            List<Paper> domPaperList = parser.parse("paper.xml");
+
+            parser = new SaxParser();
+            List<Paper> saxPaperList = parser.parse("paper.xml");
+
+            parser = new StaxParser();
+            List<Paper> staxPaperList = parser.parse("paper.xml");
+
+            System.out.println(domPaperList.equals(saxPaperList) && saxPaperList.equals(staxPaperList));
         } catch (ParsingException e) {
             e.printStackTrace();
         }
