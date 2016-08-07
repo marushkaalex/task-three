@@ -13,11 +13,11 @@
     </element>
     <complexType name="paper">
         <all>
+            <element name="monthly" type="boolean"/>
             <element name="title" type="string"/>
             <element name="type" type="tns:type"/>
             <element name="chars" type="tns:chars"/>
         </all>
-        <attribute name="monthly" type="boolean" default="false"/>
     </complexType>
     <simpleType name="type">
         <restriction base="string">
@@ -31,6 +31,7 @@
             <element name="colored" type="boolean"/>
             <element name="pageCount" type="unsignedInt"/>
             <element name="index" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="glossy" type="boolean"/>
         </all>
     </complexType>
 </schema>

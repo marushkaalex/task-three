@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <papers xmlns="http://am.epam.com/paper">
-    <paper monthly="true">
+    <paper>
         <title>Test</title>
         <type>booklet</type>
+        <monthly>false</monthly>
         <chars>
             <colored>true</colored>
             <pageCount>500</pageCount>
             <index>100-500</index>
+            <glossy>false</glossy>
         </chars>
     </paper>
 </papers>
