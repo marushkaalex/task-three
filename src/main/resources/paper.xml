@@ -3,12 +3,12 @@
     <paper>
         <title>Test</title>
         <type>booklet</type>
-        <monthly>false</monthly>
+        <monthly>true</monthly>
         <chars>
             <colored>true</colored>
             <pageCount>500</pageCount>
             <index>100-500</index>
-            <glossy>false</glossy>
+            <glossy>true</glossy>
         </chars>
     </paper>
 </papers>

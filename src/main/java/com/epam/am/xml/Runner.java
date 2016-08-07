@@ -1,36 +1,19 @@
 package com.epam.am.xml;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import com.epam.am.xml.model.Paper;
+import com.epam.am.xml.parser.PaperParser;
+import com.epam.am.xml.parser.ParsingException;
+import com.epam.am.xml.parser.SaxParser;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.IOException;
+import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
+        PaperParser parser = new SaxParser();
         try {
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser parser = factory.newSAXParser();
-            DefaultHandler handler = new DefaultHandler() {
-                @Override
-                public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-                    System.out.printf("%s %s %s %s\n", uri, localName, qName, attributes);
-                }
-
-                @Override
-                public void endElement(String uri, String localName, String qName) throws SAXException {
-                    System.out.printf("%s %s %s\n", uri, localName, qName);
-                }
-            };
-            parser.parse(Runner.class.getClassLoader().getResourceAsStream("paper.xml"), handler);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            List<Paper> paperList = parser.parse("paper.xml");
+            System.out.println(paperList);
+        } catch (ParsingException e) {
             e.printStackTrace();
         }
     }
